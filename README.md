@@ -5,6 +5,7 @@
 ## Configuration steps
 
 <details>
+
 Make a copy of your React 2 repository with review changes applied
 Install Js GraphQL plugin for Webstorm
 </details>
@@ -12,29 +13,32 @@ Install Js GraphQL plugin for Webstorm
 ## Assignment goal
 
 <details>
+
 The goal of this assignment is to get familiar with GraphQL and further improvement of Fluture knowledge via integration with GraphQL, as well as the ability to resolve configuration tasks
 </details>
 
 ## Formal requirements
 
 <details>
+
 ***KEEP IN MIND***
+
 Fluture should be used to wrap your GraphQL calls and async logic. Please use the pipeline operator whenever possible
 
 
 ***TECHNICAL REQUIREMENTS***
 
-your application should be refactored to take advantage of a real GraphQL API of your choice (example: https://beta.pokeapi.co/graphql/console/)
-the general theme of your application can, but does not have to be changed - however, try to find a structure similar to players/teams
-API calls should be wrapped in Futures sufficiently for reusability purposes
-your application should have a schema.graphql file that contains the schema of the API you are using
-schema mentioned above should be generated manually via yarn generate-schema command
-yarn generate-schema should act according to a changable configuration
-your application should provide autocompletion for gql calls based on the schema that was generated
-your application should use graphql-tag for gql queries
-please remove your fake API from the application
-the details of player/team that were previously opened in a modal should now have separate pages parametrized by ID which will fetch that precise player/team
-you should take advantage of pagination data provided by the API (if it does provide pagination data)
+* your application should be refactored to take advantage of a real GraphQL API of your choice (example: https://beta.pokeapi.co/graphql/console/)
+* the general theme of your application can, but does not have to be changed - however, try to find a structure similar to players/teams
+* API calls should be wrapped in Futures sufficiently for reusability purposes
+* your application should have a schema.graphql file that contains the schema of the API you are using
+* schema mentioned above should be generated manually via yarn generate-schema command
+* yarn generate-schema should act according to a changable configuration
+* your application should provide autocompletion for gql calls based on the schema that was generated
+* your application should use graphql-tag for gql queries
+* please remove your fake API from the application
+* the details of player/team that were previously opened in a modal should now have separate pages parametrized by ID which will fetch that precise player/team
+* you should take advantage of pagination data provided by the API (if it does provide pagination data)
 
 </details>
 

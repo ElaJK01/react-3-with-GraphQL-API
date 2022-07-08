@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { prop, sortBy, length, slice, multiply, add, map } from "ramda";
-import { delay, getPlayers } from "../../API/getFakePlayersAndTeams";
+// import { delay, getPlayers } from "../../API/getFakePlayersAndTeams";
 import Pagination from "../components/pagination";
 import PersonsList from "../components/personsList";
 import Error from "../components/error";
@@ -38,19 +38,19 @@ const Players = () => {
   const sortBySurname = sortBy(prop("surname"));
   const sortByName = sortBy(prop("name"));
 
-  const fetchPlayers = () =>
-    encase(setError)(false)
-    |> and(encase(setLoading)(true))
-    |> and(delay())
-    |> and(encase(getPlayers)(2000))
-    |> map(sortBySurname)
-    |> map(sortByName)
-    |> lastly(encase(setLoading)(false))
-    |> fork(() => setError(true))(setPlayersList);
-
-  useEffect(() => {
-    fetchPlayers();
-  }, [setPlayersList]);
+  // const fetchPlayers = () =>
+  //   encase(setError)(false)
+  //   |> and(encase(setLoading)(true))
+  //   |> and(delay())
+  //   |> and(encase(getPlayers)(2000))
+  //   |> map(sortBySurname)
+  //   |> map(sortByName)
+  //   |> lastly(encase(setLoading)(false))
+  //   |> fork(() => setError(true))(setPlayersList);
+  //
+  // useEffect(() => {
+  //   fetchPlayers();
+  // }, [setPlayersList]);
 
   const currentDataCount = () => {
     const firstPageIndex = multiply(currentPage - 1, itemsPerPage);
@@ -78,7 +78,7 @@ const Players = () => {
           )}
           {error && (
             <SectionState>
-              <Error onClick={() => fetchPlayers()} />
+              <Error onClick={() => alert("clicked!")} />
             </SectionState>
           )}
           {loading ? (

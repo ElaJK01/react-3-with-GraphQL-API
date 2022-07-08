@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { add, length, map, multiply, prop, slice, sortBy } from "ramda";
-import { delay, getTeams } from "../../API/getFakePlayersAndTeams";
+// import { delay, getTeams } from "../../API/getFakePlayersAndTeams";
 import Pagination from "../components/pagination";
 import TeamsList from "../components/teamsList";
 import Error from "../components/error";
@@ -38,16 +38,16 @@ const Teams = () => {
 
   const sortByTeamName = sortBy(prop("teamName"));
 
-  const fetchTeams = () =>
-    encase(setError)(false)
-    |> and(encase(setLoading)(true))
-    |> and(delay())
-    |> and(getTeams(11, 200))
-    |> map(sortByTeamName)
-    |> lastly(encase(setLoading)(false))
-    |> fork(() => setError(true))(setTeamsList);
-
-  useEffect(() => fetchTeams(), [setTeamsList]);
+  // const fetchTeams = () =>
+  //   encase(setError)(false)
+  //   |> and(encase(setLoading)(true))
+  //   |> and(delay())
+  //   |> and(getTeams(11, 200))
+  //   |> map(sortByTeamName)
+  //   |> lastly(encase(setLoading)(false))
+  //   |> fork(() => setError(true))(setTeamsList);
+  //
+  // useEffect(() => fetchTeams(), [setTeamsList]);
 
   const currentDataCount = () => {
     const firstPageIndex = multiply(currentPage - 1, itemsPerPage);
@@ -75,7 +75,7 @@ const Teams = () => {
           )}
           {error && (
             <SectionState>
-              <Error onClick={() => fetchTeams()} />
+              <Error onClick={() => alert("clicked!")} />
             </SectionState>
           )}
           {loading ? (

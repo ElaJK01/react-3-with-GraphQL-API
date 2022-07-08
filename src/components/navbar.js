@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { indexOf, map } from "ramda";
 
@@ -54,4 +54,4 @@ const Navbar = ({ navButtonList }) => (
   </NavbarRoot>
 );
 
-export default Navbar;
+export default withRouter(Navbar);

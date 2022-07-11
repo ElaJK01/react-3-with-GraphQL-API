@@ -72,7 +72,7 @@ const ModalText = styled.p`
   font-size: 10px;
 `;
 
-const TeamsList = ({ list }) => {
+const CountriesList = ({ list }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -142,4 +142,4 @@ const TeamsList = ({ list }) => {
   );
 };
 
-export default TeamsList;
+export default CountriesList;

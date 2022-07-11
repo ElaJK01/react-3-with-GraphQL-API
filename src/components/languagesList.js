@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { indexOf, map, prop } from "ramda";
 import Modal from "./modal";
 import styled from "styled-components";
+import getLanguageInfo from "../../API/gqlCalls/getLanguageInfo";
+import fetchData from "../../API/fetchDataFn";
+import { fork } from "fluture";
 
 const ListRoot = styled.div`
   display: flex;
@@ -70,60 +73,74 @@ const ModalText = styled.p`
   font-size: 10px;
 `;
 
-const PersonsList = ({ list }) => {
+const LanguagesList = ({ list }) => {
   const [showModal, setShowModal] = useState(false);
+
+  const [modalInfo, setModalInfo] = useState([]);
+
+  const fetchModalInfo = (id) => {
+    fetchData(getLanguageInfo(id));
+  };
+
+  const handleOnClickDetails = useCallback(
+    (id) => {
+      setShowModal(true);
+      return fetchModalInfo(id) |> fork(() => setModalInfo([]))(setModalInfo);
+    },
+    [showModal, modalInfo]
+  );
 
   return (
     <ListRoot>
       {list
         |> map((el) => (
-          <Card key={indexOf(el, list)}>
+          <Card key={prop("code", el)}>
             <CardContent>
-              <CardTitle>
-                {prop("name", el)} {prop("surname", el)}
-              </CardTitle>
+              <CardTitle>{prop("name", el)}</CardTitle>
               <div
                 style={{
                   width: 200,
                   height: 200,
-                  backgroundColor: "lightgreen",
+                  backgroundColor: "lavender",
                 }}
               />
 
               <p>
-                Score:
-                {prop("score", el)}
+                Code:
+                {prop("code", el)}
               </p>
               <CardText>
                 Description:
-                {prop("description", el)}
+                {/*{prop("description", el)}*/}
               </CardText>
-              <CardButton onClick={() => setShowModal(true)}>
+              <CardButton onClick={handleOnClickDetails(prop("code", el))}>
                 Details
               </CardButton>
               {showModal && (
                 <Modal
                   message={
-                    <div>
-                      <h5>Personal Details</h5>
+                    modalInfo
+                    |> map((i) => (
                       <div>
-                        <h5>
-                          {prop("name", el)} {prop("surname", el)}
-                        </h5>
-                        <p>{prop("description", el)}</p>
-                        <ModalText>
-                          ed ut perspiciatis unde omnis iste natus error sit
-                          voluptatem accusantium doloremque laudantium, totam
-                          rem aperiam eaque ipsa, quae ab illo inventore
-                          veritatis et quasi architecto beatae vitae dicta sunt,
-                          explicabo. Nemo enim ipsam voluptatem, quia voluptas
-                          sit, aspernatur aut odit aut fugit, sed quia
-                          consequuntur magni dolores eos, qui ratione voluptatem
-                          sequi nesciunt, neque porro quisquam est, qui dolorem
-                          ipsum, quia dolor sit, amet, consectetur
-                        </ModalText>
+                        <h5>Language Details</h5>
+                        <div>
+                          <h5>{prop("name", i)}</h5>
+                          <p>Code: {prop("code", i)}</p>
+                          <p>Native: {prop("code", i)}</p>
+                          <ModalText>
+                            ed ut perspiciatis unde omnis iste natus error sit
+                            voluptatem accusantium doloremque laudantium, totam
+                            rem aperiam eaque ipsa, quae ab illo inventore
+                            veritatis et quasi architecto beatae vitae dicta
+                            sunt, explicabo. Nemo enim ipsam voluptatem, quia
+                            voluptas sit, aspernatur aut odit aut fugit, sed
+                            quia consequuntur magni dolores eos, qui ratione
+                            voluptatem sequi nesciunt, neque porro quisquam est,
+                            qui dolorem ipsum, quia dolor sit, amet, consectetur
+                          </ModalText>
+                        </div>
                       </div>
-                    </div>
+                    ))
                   }
                   handleCloseModal={() => setShowModal(false)}
                 />
@@ -135,4 +152,4 @@ const PersonsList = ({ list }) => {
   );
 };
 
-export default PersonsList;
+export default LanguagesList;

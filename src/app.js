@@ -1,23 +1,25 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Header from "./components/header";
 import Home from "./pages/home";
 import About from "./pages/about";
 import Contact from "./pages/contact";
-import Players from "./pages/players";
-import Teams from "./pages/teams";
+import Languages from "./pages/languages";
+import Countries from "./pages/countries";
+import Layout from "./components/layout";
 
 function App() {
   return (
     <div>
-      <Header />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/contact" component={Contact} />
-        <Route exact path="/players" component={Players} />
-        <Route exact path="/teams" component={Teams} />
-      </Switch>
+      <Layout>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/contact" component={Contact} />
+          <Route exact path="/countries" component={Countries} />
+          <Route exact path="/languages" component={Languages} />
+          <Route exact path="/languages/code" component={LanguageDetails} />
+        </Switch>
+      </Layout>
     </div>
   );
 }

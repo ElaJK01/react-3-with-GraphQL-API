@@ -1,7 +1,7 @@
 import React from "react";
+import styled from "styled-components";
 import Header from "./header";
 import Footer from "./footer";
-import styled from "styled-components";
 import { footerLinks } from "../constants";
 
 const links = footerLinks;

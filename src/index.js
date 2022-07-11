@@ -7,8 +7,8 @@ import App from "./app";
 import About from "./pages/about";
 import Contact from "./pages/contact";
 import "./styles.css";
-import Teams from "./pages/teams";
-import Players from "./pages/players";
+import Countries from "./pages/countries";
+import Languages from "./pages/languages";
 import Layout from "./components/layout";
 import client from "./clientGraphQL";
 

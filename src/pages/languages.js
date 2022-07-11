@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { prop, sortBy, length, slice, multiply, add, map } from "ramda";
-// import { delay, getPlayers } from "../../API/getFakePlayersAndTeams";
+import {
+  prop,
+  sortBy,
+  length,
+  slice,
+  multiply,
+  add,
+  map,
+  props,
+  propOr,
+  path,
+} from "ramda";
 import Pagination from "../components/pagination";
-import PersonsList from "../components/personsList";
+import LanguagesList from "../components/languagesList";
 import Error from "../components/error";
 import Loading from "../components/loading";
-import { encase, fork, and, lastly } from "fluture";
+import { encase, fork, and, lastly, attempt, encaseP, attemptP } from "fluture";
 import styled from "styled-components";
+import LANGUAGES_QUERY from "../../API/gqlCalls/getLanguages";
+import fetchData from "../../API/fetchDataFn";
 
 const Section = styled.div`
   display: flex;
@@ -28,34 +40,32 @@ const SectionState = styled.div`
   margin: auto;
 `;
 
-const Players = () => {
-  const [playersList, setPlayersList] = useState([]);
+const Languages = () => {
+  const [languagesList, setLanguagesList] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(20);
 
-  const sortBySurname = sortBy(prop("surname"));
-  const sortByName = sortBy(prop("name"));
+  const fetchLanguages = () =>
+    encase(setError)(false)
+    |> and(encase(setLoading)(true))
+    |> and(fetchData(LANGUAGES_QUERY))
+    |> lastly(encase(setLoading)(false))
+    |> fork(() => setError(true))((res) =>
+      setLanguagesList(path(["data", "languages"], res))
+    );
 
-  // const fetchPlayers = () =>
-  //   encase(setError)(false)
-  //   |> and(encase(setLoading)(true))
-  //   |> and(delay())
-  //   |> and(encase(getPlayers)(2000))
-  //   |> map(sortBySurname)
-  //   |> map(sortByName)
-  //   |> lastly(encase(setLoading)(false))
-  //   |> fork(() => setError(true))(setPlayersList);
-  //
-  // useEffect(() => {
-  //   fetchPlayers();
-  // }, [setPlayersList]);
+  useEffect(() => {
+    fetchLanguages();
+  }, [setLanguagesList]);
+
+  console.log("langList", languagesList);
 
   const currentDataCount = () => {
     const firstPageIndex = multiply(currentPage - 1, itemsPerPage);
     const lastPageIndex = add(firstPageIndex, itemsPerPage);
-    return playersList |> slice(firstPageIndex, lastPageIndex);
+    return languagesList |> slice(firstPageIndex, lastPageIndex);
   };
 
   const currentData = currentDataCount();
@@ -65,12 +75,12 @@ const Players = () => {
   return (
     <div>
       <Section>
-        <SectionTitle>Players list</SectionTitle>
+        <SectionTitle>Languages list</SectionTitle>
         <div>
           {!loading && !error && (
             <Pagination
               itemsPerPage={itemsPerPage}
-              totalItems={length(playersList)}
+              totalItems={length(languagesList)}
               paginate={handlePaginate}
               currentPage={currentPage}
               adjacentPages={3}
@@ -78,7 +88,7 @@ const Players = () => {
           )}
           {error && (
             <SectionState>
-              <Error onClick={() => alert("clicked!")} />
+              <Error onClick={() => fetchLanguages()} />
             </SectionState>
           )}
           {loading ? (
@@ -86,7 +96,7 @@ const Players = () => {
               <Loading />
             </SectionState>
           ) : (
-            !error && <PersonsList list={currentData} />
+            !error && <LanguagesList list={currentData} />
           )}
         </div>
       </Section>
@@ -94,4 +104,4 @@ const Players = () => {
   );
 };
 
-export default Players;
+export default Languages;

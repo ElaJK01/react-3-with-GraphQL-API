@@ -41,6 +41,6 @@ export const navButtonList = [
   { title: "Home", link: "/" },
   { title: "About", link: "/about" },
   { title: "Contact", link: "/contact" },
-  { title: "Gardening Teams", link: "/teams" },
-  { title: "Players", link: "/players" },
+  { title: "Countries", link: "/countries" },
+  { title: "Languages", link: "/languages" },
 ];

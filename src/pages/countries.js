@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { add, length, map, multiply, prop, slice, sortBy } from "ramda";
-// import { delay, getTeams } from "../../API/getFakePlayersAndTeams";
 import Pagination from "../components/pagination";
-import TeamsList from "../components/teamsList";
+import CountriesList from "../components/countriesList";
 import Error from "../components/error";
 import Loading from "../components/loading";
 import { and, encase, fork, lastly } from "fluture";
@@ -29,7 +28,7 @@ const SectionState = styled.div`
   margin: auto;
 `;
 
-const Teams = () => {
+const Countries = () => {
   const [teamsList, setTeamsList] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -83,7 +82,7 @@ const Teams = () => {
               <Loading />
             </SectionState>
           ) : (
-            !error && <TeamsList list={currentData} />
+            !error && <CountriesList list={currentData} />
           )}
         </div>
       </Section>
@@ -91,4 +90,4 @@ const Teams = () => {
   );
 };
 
-export default Teams;
+export default Countries;

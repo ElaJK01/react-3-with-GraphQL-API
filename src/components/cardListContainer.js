@@ -26,12 +26,8 @@ const CardListContainer = ({ imgList, cardButtonLinks }) => {
   );
   return (
     <CardList>
-      {map(
-        (i) => (
-          <Card key={i} img={nth(0, i)} link={nth(-1, i)} />
-        ),
-        zippedPhotosAndLinks
-      )}
+      {zippedPhotosAndLinks
+        |> map((i) => <Card key={i} img={nth(0, i)} link={nth(-1, i)} />)}
     </CardList>
   );
 };

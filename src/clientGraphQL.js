@@ -4,9 +4,10 @@ import {
   gql,
   InMemoryCache,
 } from "@apollo/client";
+import LANGUAGES_QUERY from "../API/gqlCalls/getLanguages";
 
 const httpLink = createHttpLink({
-  uri: "https://api.spacex.land/graphql/",
+  uri: "https://countries.trevorblades.com/graphql",
 });
 
 const client = new ApolloClient({
@@ -14,17 +15,10 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-client
-  .query({
-    query: gql`
-      {
-        launchesPast(limit: 10) {
-          mission_name
-          id
-        }
-      }
-    `,
-  })
-  .then((result) => console.log("data in client", result));
+// client
+//   .query({
+//     query: LANGUAGES_QUERY,
+//   })
+//   .then((result) => console.log("data in client", result));
 
 export default client;

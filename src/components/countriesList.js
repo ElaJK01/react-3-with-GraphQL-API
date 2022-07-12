@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { indexOf, map, prop } from "ramda";
-import Modal from "./modal";
+import React from "react";
+import { map, prop } from "ramda";
 import styled from "styled-components";
 
 const ListContainer = styled.div`
@@ -44,11 +43,8 @@ const CardTitle = styled.h4`
   padding: 0;
 `;
 
-const CardText = styled.p`
-  font-size: 10px;
-`;
-
-const CardButton = styled.button`
+const CardButton = styled.a`
+  text-decoration: none;
   background: whitesmoke;
   border-style: none;
   border-radius: 5px;
@@ -65,16 +61,7 @@ const CardButton = styled.button`
   }
 `;
 
-const ModalText = styled.p`
-  display: inline;
-  text-align: justify;
-  margin: 5px;
-  font-size: 10px;
-`;
-
 const CountriesList = ({ list }) => {
-  const [showModal, setShowModal] = useState(false);
-
   return (
     <ListContainer>
       {list
@@ -93,6 +80,7 @@ const CountriesList = ({ list }) => {
                   backgroundColor: "yellow",
                   fontSize: 10,
                   padding: 0,
+                  marginBottom: 10,
                 }}
               >
                 <h4>Data</h4>
@@ -109,44 +97,13 @@ const CountriesList = ({ list }) => {
                     </ul>
                   </li>
                   <li>Emoji: {prop("emoji", country)}</li>
+                  <li>Capital: {prop("capital", country)}</li>
                 </ul>
               </div>
-              {/*<CardText>*/}
-              {/*  States:*/}
-              {/*  <ul style={{ listStyleType: "none" }}>*/}
-              {/*    {prop("states", country)*/}
-              {/*      |> map((state) => (*/}
-              {/*        <li key={prop("code", state)}>{prop("name", state)}</li>*/}
-              {/*      ))}*/}
-              {/*  </ul>*/}
-              {/*</CardText>*/}
-              <CardButton onClick={() => setShowModal(true)}>
+              <CardButton href={`/countries/${prop("code", country)}`}>
                 Details
               </CardButton>
             </CardContent>
-            {/*{showModal && (*/}
-            {/*  <Modal*/}
-            {/*    message={*/}
-            {/*      <ModalText>*/}
-            {/*        <h5>Players</h5>*/}
-            {/*        <div>*/}
-            {/*          <ul style={{ listStyleType: "none" }}>*/}
-            {/*            {map((i) => {*/}
-            {/*              const name = prop("name", i);*/}
-            {/*              const surname = prop("surname", i);*/}
-            {/*              return (*/}
-            {/*                <li>*/}
-            {/*                  {name} {surname}*/}
-            {/*                </li>*/}
-            {/*              );*/}
-            {/*            }, prop("teamPlayers", el))}*/}
-            {/*          </ul>*/}
-            {/*        </div>*/}
-            {/*      </ModalText>*/}
-            {/*    }*/}
-            {/*    handleCloseModal={() => setShowModal(false)}*/}
-            {/*  />*/}
-            {/*)}*/}
           </Card>
         ))}
     </ListContainer>

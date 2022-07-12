@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { add, length, map, multiply, path, prop, slice, sortBy } from "ramda";
+import { add, length, multiply, path, slice } from "ramda";
 import Pagination from "../components/pagination";
 import CountriesList from "../components/countriesList";
 import Error from "../components/error";
@@ -7,7 +7,6 @@ import Loading from "../components/loading";
 import { and, encase, fork, lastly } from "fluture";
 import styled from "styled-components";
 import { fetchData } from "../../API/fetchDataFn";
-import LANGUAGES_QUERY from "../../API/gqlCalls/getLanguages";
 import COUNTRIES_QUERY from "../../API/gqlCalls/getCountries";
 
 const Section = styled.div`
@@ -38,19 +37,6 @@ const Countries = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
 
-  const sortByTeamName = sortBy(prop("teamName"));
-
-  // const fetchTeams = () =>
-  //   encase(setError)(false)
-  //   |> and(encase(setLoading)(true))
-  //   |> and(delay())
-  //   |> and(getTeams(11, 200))
-  //   |> map(sortByTeamName)
-  //   |> lastly(encase(setLoading)(false))
-  //   |> fork(() => setError(true))(setTeamsList);
-  //
-  // useEffect(() => fetchTeams(), [setTeamsList]);
-
   const fetchCountries = () =>
     encase(setError)(false)
     |> and(encase(setLoading)(true))
@@ -63,8 +49,6 @@ const Countries = () => {
   useEffect(() => {
     fetchCountries();
   }, [setCountriesList]);
-
-  console.log("countriesList", countriesList);
 
   const currentDataCount = () => {
     const firstPageIndex = multiply(currentPage - 1, itemsPerPage);
@@ -79,7 +63,7 @@ const Countries = () => {
   return (
     <div>
       <Section>
-        <SectionTitle>Teams list</SectionTitle>
+        <SectionTitle>Countries list</SectionTitle>
         <div>
           {!loading && !error && (
             <Pagination
@@ -92,7 +76,7 @@ const Countries = () => {
           )}
           {error && (
             <SectionState>
-              <Error onClick={() => alert("clicked!")} />
+              <Error onClick={() => fetchCountries()} />
             </SectionState>
           )}
           {loading ? (

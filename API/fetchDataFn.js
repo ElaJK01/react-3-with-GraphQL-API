@@ -7,6 +7,3 @@ export const fetchData = (query) =>
       query,
     })
   );
-
-export const fetchDataWithVariables = (query, variables) =>
-  attemptP(() => client.query({ query }, { variables }));

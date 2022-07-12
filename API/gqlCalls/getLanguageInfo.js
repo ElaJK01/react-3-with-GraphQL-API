@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 const getLangInfo = gql`
-  query Language($code: String) {
+  query Language($code: ID!) {
     language(code: $code) {
       code
       name

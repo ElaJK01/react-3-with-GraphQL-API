@@ -7,13 +7,15 @@
     "dev": "webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/",
-    "lint:fix": "eslint --fix src/"
+    "lint:fix": "eslint --fix src/",
+    "generate-schema": "rover graph introspect https://countries.trevorblades.com/graphql > prod-schema.graphql"
   },
   "repository": "git@github.com:ElaJK01/react-1.git",
   "author": "Elżbieta Janus-Kaleta <60756867+ElaJK01@users.noreply.github.com>",
   "license": "MIT",
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@apollo/rover": "^0.7.0",
     "@babel/core": "^7.18.2",
     "@babel/node": "^7.17.10",
     "@babel/plugin-proposal-class-properties": "^7.17.12",

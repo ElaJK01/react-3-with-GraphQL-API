@@ -5,6 +5,7 @@ const COUNTRIES_QUERY = gql`
     countries {
       name
       code
+      capital
       currency
       languages {
         name

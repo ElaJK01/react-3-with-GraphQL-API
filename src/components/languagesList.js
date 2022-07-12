@@ -45,11 +45,8 @@ const CardTitle = styled.h4`
   padding: 0;
 `;
 
-const CardText = styled.p`
-  font-size: 10px;
-`;
-
-const CardButton = styled.button`
+const CardButton = styled.a`
+  text-decoration: none;
   background: whitesmoke;
   border-style: none;
   border-radius: 5px;
@@ -66,77 +63,31 @@ const CardButton = styled.button`
   }
 `;
 
-const ModalText = styled.p`
-  display: inline;
-  text-align: justify;
-  margin: 5px;
-  font-size: 10px;
-`;
-
-const LanguagesList = ({ list }) => {
-  const [showModal, setShowModal] = useState(false);
-
-  const [modalInfo, setModalInfo] = useState([]);
-
-  return (
-    <ListRoot>
-      {list
-        |> map((el) => (
-          <Card key={prop("code", el)}>
-            <CardContent>
-              <CardTitle>{prop("name", el)}</CardTitle>
-              <div
-                style={{
-                  width: 200,
-                  height: 200,
-                  backgroundColor: "lavender",
-                }}
-              />
-              <p>
-                Code:
-                {prop("code", el)}
-              </p>
-              <CardText>
-                Description:
-                {/*{prop("description", el)}*/}
-              </CardText>
-              <CardButton link={`/details/:${prop("code", el)}`}>
-                Details
-              </CardButton>
-              {/*{showModal && (*/}
-              {/*  <Modal*/}
-              {/*    message={*/}
-              {/*      modalInfo*/}
-              {/*      |> map((i) => (*/}
-              {/*        <div>*/}
-              {/*          <h5>Language Details</h5>*/}
-              {/*          <div>*/}
-              {/*            <h5>{prop("name", i)}</h5>*/}
-              {/*            <p>Code: {prop("code", i)}</p>*/}
-              {/*            <p>Native: {prop("code", i)}</p>*/}
-              {/*            <ModalText>*/}
-              {/*              ed ut perspiciatis unde omnis iste natus error sit*/}
-              {/*              voluptatem accusantium doloremque laudantium, totam*/}
-              {/*              rem aperiam eaque ipsa, quae ab illo inventore*/}
-              {/*              veritatis et quasi architecto beatae vitae dicta*/}
-              {/*              sunt, explicabo. Nemo enim ipsam voluptatem, quia*/}
-              {/*              voluptas sit, aspernatur aut odit aut fugit, sed*/}
-              {/*              quia consequuntur magni dolores eos, qui ratione*/}
-              {/*              voluptatem sequi nesciunt, neque porro quisquam est,*/}
-              {/*              qui dolorem ipsum, quia dolor sit, amet, consectetur*/}
-              {/*            </ModalText>*/}
-              {/*          </div>*/}
-              {/*        </div>*/}
-              {/*      ))*/}
-              {/*    }*/}
-              {/*    handleCloseModal={() => setShowModal(false)}*/}
-              {/*  />*/}
-              {/*)}*/}
-            </CardContent>
-          </Card>
-        ))}
-    </ListRoot>
-  );
-};
+const LanguagesList = ({ list }) => (
+  <ListRoot>
+    {list
+      |> map((el) => (
+        <Card key={prop("code", el)}>
+          <CardContent>
+            <CardTitle>{prop("name", el)}</CardTitle>
+            <div
+              style={{
+                width: 200,
+                height: 200,
+                backgroundColor: "lavender",
+              }}
+            />
+            <p>
+              Code:
+              {prop("code", el)}
+            </p>
+            <CardButton href={`/languages/${prop("code", el)}`}>
+              Details
+            </CardButton>
+          </CardContent>
+        </Card>
+      ))}
+  </ListRoot>
+);
 
 export default LanguagesList;

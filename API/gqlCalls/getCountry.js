@@ -1,12 +1,15 @@
 import { gql } from "@apollo/client";
 
-const COUNTRY_QUERY = (code) => gql`
-  {
-    country(code: ${code}) {
+const COUNTRY_QUERY = gql`
+  query Country($code: ID!) {
+    country(code: $code) {
+      code
       name
+      capital
       native
       currency
       languages {
+        code
         name
       }
       emoji

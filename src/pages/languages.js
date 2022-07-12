@@ -1,16 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  prop,
-  sortBy,
-  length,
-  slice,
-  multiply,
-  add,
-  map,
-  props,
-  propOr,
-  path,
-} from "ramda";
+import { length, slice, multiply, add, path } from "ramda";
 import Pagination from "../components/pagination";
 import LanguagesList from "../components/languagesList";
 import Error from "../components/error";
@@ -59,8 +48,6 @@ const Languages = () => {
   useEffect(() => {
     fetchLanguages();
   }, [setLanguagesList]);
-
-  console.log("langList", languagesList);
 
   const currentDataCount = () => {
     const firstPageIndex = multiply(currentPage - 1, itemsPerPage);

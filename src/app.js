@@ -7,6 +7,7 @@ import Languages from "./pages/languages";
 import Countries from "./pages/countries";
 import Layout from "./components/layout";
 import LanguageDetails from "./pages/languageDetails";
+import CountryDetails from "./pages/countryDetails";
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/countries" component={Countries} />
           <Route exact path="/languages" component={Languages} />
-          <Route path="/details/:code" component={LanguageDetails} />
+          <Route path="/languages/:code" component={LanguageDetails} />
+          <Route path="/countries/:code" component={CountryDetails} />
         </Switch>
       </Layout>
     </div>

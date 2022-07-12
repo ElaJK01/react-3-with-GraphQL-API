@@ -18,7 +18,7 @@ import Loading from "../components/loading";
 import { encase, fork, and, lastly, attempt, encaseP, attemptP } from "fluture";
 import styled from "styled-components";
 import LANGUAGES_QUERY from "../../API/gqlCalls/getLanguages";
-import fetchData from "../../API/fetchDataFn";
+import { fetchData } from "../../API/fetchDataFn";
 
 const Section = styled.div`
   display: flex;

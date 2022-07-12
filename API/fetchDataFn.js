@@ -1,11 +1,12 @@
 import { attemptP } from "fluture";
 import client from "../src/clientGraphQL";
 
-const fetchData = (query) =>
+export const fetchData = (query) =>
   attemptP(() =>
     client.query({
       query,
     })
   );
 
-export default fetchData;
+export const fetchDataWithVariables = (query, variables) =>
+  attemptP(() => client.query({ query }, { variables }));

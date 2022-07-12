@@ -78,18 +78,6 @@ const LanguagesList = ({ list }) => {
 
   const [modalInfo, setModalInfo] = useState([]);
 
-  const fetchModalInfo = (id) => {
-    fetchData(getLanguageInfo(id));
-  };
-
-  const handleOnClickDetails = useCallback(
-    (id) => {
-      setShowModal(true);
-      return fetchModalInfo(id) |> fork(() => setModalInfo([]))(setModalInfo);
-    },
-    [showModal, modalInfo]
-  );
-
   return (
     <ListRoot>
       {list
@@ -104,7 +92,6 @@ const LanguagesList = ({ list }) => {
                   backgroundColor: "lavender",
                 }}
               />
-
               <p>
                 Code:
                 {prop("code", el)}
@@ -113,38 +100,38 @@ const LanguagesList = ({ list }) => {
                 Description:
                 {/*{prop("description", el)}*/}
               </CardText>
-              <CardButton onClick={handleOnClickDetails(prop("code", el))}>
+              <CardButton link={`/details/:${prop("code", el)}`}>
                 Details
               </CardButton>
-              {showModal && (
-                <Modal
-                  message={
-                    modalInfo
-                    |> map((i) => (
-                      <div>
-                        <h5>Language Details</h5>
-                        <div>
-                          <h5>{prop("name", i)}</h5>
-                          <p>Code: {prop("code", i)}</p>
-                          <p>Native: {prop("code", i)}</p>
-                          <ModalText>
-                            ed ut perspiciatis unde omnis iste natus error sit
-                            voluptatem accusantium doloremque laudantium, totam
-                            rem aperiam eaque ipsa, quae ab illo inventore
-                            veritatis et quasi architecto beatae vitae dicta
-                            sunt, explicabo. Nemo enim ipsam voluptatem, quia
-                            voluptas sit, aspernatur aut odit aut fugit, sed
-                            quia consequuntur magni dolores eos, qui ratione
-                            voluptatem sequi nesciunt, neque porro quisquam est,
-                            qui dolorem ipsum, quia dolor sit, amet, consectetur
-                          </ModalText>
-                        </div>
-                      </div>
-                    ))
-                  }
-                  handleCloseModal={() => setShowModal(false)}
-                />
-              )}
+              {/*{showModal && (*/}
+              {/*  <Modal*/}
+              {/*    message={*/}
+              {/*      modalInfo*/}
+              {/*      |> map((i) => (*/}
+              {/*        <div>*/}
+              {/*          <h5>Language Details</h5>*/}
+              {/*          <div>*/}
+              {/*            <h5>{prop("name", i)}</h5>*/}
+              {/*            <p>Code: {prop("code", i)}</p>*/}
+              {/*            <p>Native: {prop("code", i)}</p>*/}
+              {/*            <ModalText>*/}
+              {/*              ed ut perspiciatis unde omnis iste natus error sit*/}
+              {/*              voluptatem accusantium doloremque laudantium, totam*/}
+              {/*              rem aperiam eaque ipsa, quae ab illo inventore*/}
+              {/*              veritatis et quasi architecto beatae vitae dicta*/}
+              {/*              sunt, explicabo. Nemo enim ipsam voluptatem, quia*/}
+              {/*              voluptas sit, aspernatur aut odit aut fugit, sed*/}
+              {/*              quia consequuntur magni dolores eos, qui ratione*/}
+              {/*              voluptatem sequi nesciunt, neque porro quisquam est,*/}
+              {/*              qui dolorem ipsum, quia dolor sit, amet, consectetur*/}
+              {/*            </ModalText>*/}
+              {/*          </div>*/}
+              {/*        </div>*/}
+              {/*      ))*/}
+              {/*    }*/}
+              {/*    handleCloseModal={() => setShowModal(false)}*/}
+              {/*  />*/}
+              {/*)}*/}
             </CardContent>
           </Card>
         ))}

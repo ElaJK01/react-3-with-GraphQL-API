@@ -78,64 +78,75 @@ const CountriesList = ({ list }) => {
   return (
     <ListContainer>
       {list
-        |> map((el) => (
-          <Card key={indexOf(el, list)}>
+        |> map((country) => (
+          <Card key={prop("code", country)}>
             <CardContent>
-              <CardTitle> {prop("teamName", el)}</CardTitle>
+              <CardTitle> {prop("name", country)}</CardTitle>
               <div
                 style={{
                   display: "flex",
                   justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
                   width: 200,
                   height: "fit-content",
                   backgroundColor: "yellow",
                   fontSize: 10,
+                  padding: 0,
                 }}
               >
-                <h5>Team players</h5>
+                <h4>Data</h4>
                 <ul style={{ listStyleType: "none" }}>
-                  {map((i) => {
-                    const name = prop("name", i);
-                    const surname = prop("surname", i);
-                    return (
-                      <li key={indexOf(i, prop("teamPlayers", el))}>
-                        {name} {surname}
-                      </li>
-                    );
-                  }, prop("teamPlayers", el))}
+                  <li>Code: {prop("code", country)}</li>
+                  <li>Currency: {prop("currency", country)}</li>
+                  <li>
+                    Languages:{" "}
+                    <ul style={{ listStyleType: "none" }}>
+                      {prop("languages", country)
+                        |> map((lang) => (
+                          <li key={prop("code", lang)}>{prop("name", lang)}</li>
+                        ))}
+                    </ul>
+                  </li>
+                  <li>Emoji: {prop("emoji", country)}</li>
                 </ul>
               </div>
-              <CardText>
-                Description:
-                {prop("description", el)}
-              </CardText>
+              {/*<CardText>*/}
+              {/*  States:*/}
+              {/*  <ul style={{ listStyleType: "none" }}>*/}
+              {/*    {prop("states", country)*/}
+              {/*      |> map((state) => (*/}
+              {/*        <li key={prop("code", state)}>{prop("name", state)}</li>*/}
+              {/*      ))}*/}
+              {/*  </ul>*/}
+              {/*</CardText>*/}
               <CardButton onClick={() => setShowModal(true)}>
                 Details
               </CardButton>
             </CardContent>
-            {showModal && (
-              <Modal
-                message={
-                  <ModalText>
-                    <h5>Players</h5>
-                    <div>
-                      <ul style={{ listStyleType: "none" }}>
-                        {map((i) => {
-                          const name = prop("name", i);
-                          const surname = prop("surname", i);
-                          return (
-                            <li>
-                              {name} {surname}
-                            </li>
-                          );
-                        }, prop("teamPlayers", el))}
-                      </ul>
-                    </div>
-                  </ModalText>
-                }
-                handleCloseModal={() => setShowModal(false)}
-              />
-            )}
+            {/*{showModal && (*/}
+            {/*  <Modal*/}
+            {/*    message={*/}
+            {/*      <ModalText>*/}
+            {/*        <h5>Players</h5>*/}
+            {/*        <div>*/}
+            {/*          <ul style={{ listStyleType: "none" }}>*/}
+            {/*            {map((i) => {*/}
+            {/*              const name = prop("name", i);*/}
+            {/*              const surname = prop("surname", i);*/}
+            {/*              return (*/}
+            {/*                <li>*/}
+            {/*                  {name} {surname}*/}
+            {/*                </li>*/}
+            {/*              );*/}
+            {/*            }, prop("teamPlayers", el))}*/}
+            {/*          </ul>*/}
+            {/*        </div>*/}
+            {/*      </ModalText>*/}
+            {/*    }*/}
+            {/*    handleCloseModal={() => setShowModal(false)}*/}
+            {/*  />*/}
+            {/*)}*/}
           </Card>
         ))}
     </ListContainer>

@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "./navbar";
 import styled from "styled-components";
-import ImgHeader from "./imgHeader";
+import Navbar from "./navbar";
 import { navButtonList } from "../constants";
+import ImgHeader from "./imgHeader";
 
 const HeaderRoot = styled.div`
   display: flex;
@@ -46,10 +46,7 @@ const HeaderH1 = styled.h1`
 const Header = () => (
   <HeaderRoot>
     <HeaderContainer>
-      <ImgHeader
-        src={"https://picsum.photos/id/1002/1000/50"}
-        alt={"header-img"}
-      />
+      <ImgHeader src="https://picsum.photos/id/1002/1000/50" alt="header-img" />
       <HeaderTitle>
         <HeaderH1>Countries and Languages</HeaderH1>
       </HeaderTitle>

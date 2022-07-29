@@ -61,53 +61,51 @@ const CardButton = styled.a`
   }
 `;
 
-const CountriesList = ({ list }) => {
-  return (
-    <ListContainer>
-      {list
-        |> map((country) => (
-          <Card key={prop("code", country)}>
-            <CardContent>
-              <CardTitle> {prop("name", country)}</CardTitle>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  width: 200,
-                  height: "fit-content",
-                  backgroundColor: "yellow",
-                  fontSize: 10,
-                  padding: 0,
-                  marginBottom: 10,
-                }}
-              >
-                <h4>Data</h4>
-                <ul style={{ listStyleType: "none" }}>
-                  <li>Code: {prop("code", country)}</li>
-                  <li>Currency: {prop("currency", country)}</li>
-                  <li>
-                    Languages:{" "}
-                    <ul style={{ listStyleType: "none" }}>
-                      {prop("languages", country)
-                        |> map((lang) => (
-                          <li key={prop("code", lang)}>{prop("name", lang)}</li>
-                        ))}
-                    </ul>
-                  </li>
-                  <li>Emoji: {prop("emoji", country)}</li>
-                  <li>Capital: {prop("capital", country)}</li>
-                </ul>
-              </div>
-              <CardButton href={`/countries/${prop("code", country)}`}>
-                Details
-              </CardButton>
-            </CardContent>
-          </Card>
-        ))}
-    </ListContainer>
-  );
-};
+const CardInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 200px;
+  height: fit-content;
+  background-color: yellow;
+  font-size: 10px;
+  padding: 0;
+  margin-bottom: 10px;
+`;
+
+const CountriesList = ({ list }) => (
+  <ListContainer>
+    {list
+      |> map((country) => (
+        <Card key={prop("code", country)}>
+          <CardContent>
+            <CardTitle> {prop("name", country)}</CardTitle>
+            <CardInfo>
+              <h4>Data</h4>
+              <ul style={{ listStyleType: "none" }}>
+                <li>Code: {prop("code", country)}</li>
+                <li>Currency: {prop("currency", country)}</li>
+                <li>
+                  Languages:{" "}
+                  <ul style={{ listStyleType: "none" }}>
+                    {prop("languages", country)
+                      |> map((lang) => (
+                        <li key={prop("code", lang)}>{prop("name", lang)}</li>
+                      ))}
+                  </ul>
+                </li>
+                <li>Emoji: {prop("emoji", country)}</li>
+                <li>Capital: {prop("capital", country)}</li>
+              </ul>
+            </CardInfo>
+            <CardButton href={`/countries/${prop("code", country)}`}>
+              Details
+            </CardButton>
+          </CardContent>
+        </Card>
+      ))}
+  </ListContainer>
+);
 
 export default CountriesList;

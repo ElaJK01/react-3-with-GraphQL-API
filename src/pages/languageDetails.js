@@ -2,10 +2,17 @@ import React from "react";
 import { prop } from "ramda";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+import styled from "styled-components";
 import Error from "../components/error";
 import Loading from "../components/loading";
 import Section from "../components/section";
 import getLangInfo from "../../API/gqlCalls/getLanguageInfo";
+
+const LanguageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const LanguageDetails = () => {
   const { code } = useParams();
@@ -17,13 +24,7 @@ const LanguageDetails = () => {
   const languageDetails = prop("language", data);
 
   const message = (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <LanguageContainer>
       {error && <Error />}
       {loading && <Loading />}
       {!error && !loading && languageDetails && (
@@ -33,10 +34,10 @@ const LanguageDetails = () => {
           <p>Native: {languageDetails.native}</p>
         </div>
       )}
-    </div>
+    </LanguageContainer>
   );
 
-  return <Section title="Language Details" children={message} />;
+  return <Section title="Language Details">{message}</Section>;
 };
 
 export default LanguageDetails;

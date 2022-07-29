@@ -1,7 +1,13 @@
-import React from "react";
-import CardListContainer from "../components/cardListContainer";
-import { cardButtonLinks, imgList } from "../constants";
+import React, { useEffect, useState } from "react";
+import { and, chain, encase, fork, lastly } from "fluture";
+import { path } from "ramda";
+import styled from "styled-components";
 import Section from "../components/section";
+import { fetchData } from "../../API/fetchDataFn";
+import CONTINENTS_QUERY from "../../API/gqlCalls/getContinents";
+import ContinentsList from "../components/continentsList";
+import Error from "../components/error";
+import Loading from "../components/loading";
 
 const homeText =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod\n" +
@@ -15,14 +21,53 @@ const homeText =
   "        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui\n" +
   "        officia deserunt mollit anim id est laborum.";
 
-const Home = () => (
-  <Section
-    title={"Lorem ipsum dolor sit amet, consectetur adipiscing elit"}
-    text={homeText}
-    children={
-      <CardListContainer imgList={imgList} cardButtonLinks={cardButtonLinks} />
-    }
-  />
-);
+const SectionState = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+`;
+
+const Home = () => {
+  const [continentsList, setContinentsList] = useState([]);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const fetchContinents = () =>
+    encase(setError)(false)
+    |> and(encase(setLoading)(true))
+    |> chain(fetchData(CONTINENTS_QUERY))
+    |> lastly(encase(setLoading)(false))
+    |> fork(() => setError(true))((res) =>
+      setContinentsList(path(["data", "continents"], res))
+    );
+
+  useEffect(() => {
+    fetchContinents();
+  }, [setContinentsList]);
+
+  return (
+    <div>
+      {error && (
+        <SectionState>
+          <Error onClick={() => fetchContinents()} />
+        </SectionState>
+      )}
+      {loading ? (
+        <SectionState>
+          <Loading />
+        </SectionState>
+      ) : (
+        <Section
+          title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+          text={homeText}
+        >
+          <ContinentsList list={continentsList} />
+        </Section>
+      )}
+    </div>
+  );
+};
 
 export default Home;

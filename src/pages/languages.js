@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { length, slice, multiply, add, path } from "ramda";
+import { add, length, multiply, path, slice } from "ramda";
+import { and, chain, encase, fork, lastly } from "fluture";
+import styled from "styled-components";
 import Pagination from "../components/pagination";
 import LanguagesList from "../components/languagesList";
 import Error from "../components/error";
 import Loading from "../components/loading";
-import { encase, fork, and, lastly, attempt, encaseP, attemptP } from "fluture";
-import styled from "styled-components";
 import LANGUAGES_QUERY from "../../API/gqlCalls/getLanguages";
 import { fetchData } from "../../API/fetchDataFn";
 
@@ -39,7 +39,7 @@ const Languages = () => {
   const fetchLanguages = () =>
     encase(setError)(false)
     |> and(encase(setLoading)(true))
-    |> and(fetchData(LANGUAGES_QUERY))
+    |> chain(fetchData(LANGUAGES_QUERY))
     |> lastly(encase(setLoading)(false))
     |> fork(() => setError(true))((res) =>
       setLanguagesList(path(["data", "languages"], res))

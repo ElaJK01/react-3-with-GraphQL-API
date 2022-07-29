@@ -1,6 +1,6 @@
 import React from "react";
-import error from "../assets/error.png";
 import styled from "styled-components";
+import error from "../assets/error.png";
 import SmallImage from "./smallImage";
 
 const ErrorDiv = styled.div`
@@ -30,8 +30,9 @@ const ButtonError = styled.button`
 
 const Error = ({ onClick }) => (
   <ErrorDiv>
+    {/* eslint-disable-next-line react/no-unescaped-entities */}
     <ErrorParagraph>Sorry, couldn't get what you want!</ErrorParagraph>
-    <SmallImage image={error} altName={"error"} />
+    <SmallImage image={error} altName="error" />
     <ButtonError onClick={onClick}>Try again!</ButtonError>
   </ErrorDiv>
 );

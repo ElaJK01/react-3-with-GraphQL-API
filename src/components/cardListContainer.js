@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { map, nth, zip } from "ramda";
-import Card from "./card";
 import styled from "styled-components";
+import Card from "./card";
 
 const CardList = styled.div`
   display: flex;

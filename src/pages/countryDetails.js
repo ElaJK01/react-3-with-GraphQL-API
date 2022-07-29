@@ -2,10 +2,17 @@ import React from "react";
 import { indexOf, map, prop } from "ramda";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+import styled from "styled-components";
 import Error from "../components/error";
 import Loading from "../components/loading";
 import Section from "../components/section";
 import COUNTRY_QUERY from "../../API/gqlCalls/getCountry";
+
+const CountryContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const CountryDetails = () => {
   const { code } = useParams();
@@ -17,13 +24,7 @@ const CountryDetails = () => {
   const countryDetails = prop("country", data);
 
   const message = (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <CountryContainer>
       {error && <Error />}
       {loading && <Loading />}
       {!error && !loading && countryDetails && (
@@ -58,10 +59,10 @@ const CountryDetails = () => {
           </div>
         </div>
       )}
-    </div>
+    </CountryContainer>
   );
 
-  return <Section title="Country Details" children={message} />;
+  return <Section title="Country Details">{message}</Section>;
 };
 
 export default CountryDetails;

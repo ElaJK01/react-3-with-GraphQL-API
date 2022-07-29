@@ -66,10 +66,10 @@ const CardButton = styled.a`
 const CardDiv = styled.div`
   width: 200px;
   height: 200px;
-  background-color: lavender;
+  background-color: lightseagreen;
 `;
 
-const LanguagesList = ({ list }) => (
+const ContinentsList = ({ list }) => (
   <ListRoot>
     {list
       |> map((el) => (
@@ -81,7 +81,7 @@ const LanguagesList = ({ list }) => (
               Code:
               {prop("code", el)}
             </p>
-            <CardButton href={`/languages/${prop("code", el)}`}>
+            <CardButton href={`/continents/${prop("code", el)}`}>
               Details
             </CardButton>
           </CardContent>
@@ -90,4 +90,4 @@ const LanguagesList = ({ list }) => (
   </ListRoot>
 );
 
-export default LanguagesList;
+export default ContinentsList;

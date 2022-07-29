@@ -8,6 +8,8 @@ module.exports = {
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
+      modules: true,
+      experimentalObjectRestSpread: true,
     },
     ecmaVersion: "latest",
     sourceType: "module",
@@ -19,5 +21,9 @@ module.exports = {
     "react/no-unstable-nested-components": [1, { allowAsProps: true }],
     "react/function-component-definition": "off",
     "react/prop-types": "off",
+    "import/no-named-as-default": 0,
+    "import/no-named-as-default-member": 0,
+    "consistent-return": 0,
   },
+  parser: "@babel/eslint-parser",
 };

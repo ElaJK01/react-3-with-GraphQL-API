@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { add, length, multiply, path, slice } from "ramda";
+import { and, chain, encase, fork, lastly } from "fluture";
+import styled from "styled-components";
 import Pagination from "../components/pagination";
 import CountriesList from "../components/countriesList";
 import Error from "../components/error";
 import Loading from "../components/loading";
-import { and, encase, fork, lastly } from "fluture";
-import styled from "styled-components";
 import { fetchData } from "../../API/fetchDataFn";
 import COUNTRIES_QUERY from "../../API/gqlCalls/getCountries";
 
@@ -40,7 +40,7 @@ const Countries = () => {
   const fetchCountries = () =>
     encase(setError)(false)
     |> and(encase(setLoading)(true))
-    |> and(fetchData(COUNTRIES_QUERY))
+    |> chain(fetchData(COUNTRIES_QUERY))
     |> lastly(encase(setLoading)(false))
     |> fork(() => setError(true))((res) =>
       setCountriesList(path(["data", "countries"], res))

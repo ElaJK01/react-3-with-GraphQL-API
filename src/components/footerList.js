@@ -12,15 +12,13 @@ const List = styled.div`
   }
 `;
 
-const FooterList = ({ list }) => {
-  return (
-    <List>
-      {list
-        |> map((el) => (
-          <Link key={indexOf(el, list)} href={el.link} name={el.title} />
-        ))}
-    </List>
-  );
-};
+const FooterList = ({ list }) => (
+  <List>
+    {list
+      |> map((el) => (
+        <Link key={indexOf(el, list)} href={el.link} name={el.title} />
+      ))}
+  </List>
+);
 
 export default FooterList;

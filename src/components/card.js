@@ -1,6 +1,6 @@
 import React from "react";
-import CardButton from "./cardButton";
 import styled from "styled-components";
+import CardButton from "./cardButton";
 
 const CardContainer = styled.div`
   display: flex;
@@ -10,6 +10,7 @@ const CardContainer = styled.div`
   margin: 10px;
   box-sizing: border-box;
   flex-basis: 30%;
+  align-items: center;
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
     flex-basis: 80%;
@@ -49,6 +50,14 @@ const CardContent = styled.div`
   }
 `;
 
+const ImgContainer = styled.div`
+  width: 200px;
+  height: 200px;
+  > img {
+    width: 100%;
+  }
+`;
+
 const Img = styled.img`
   width: 100%;
 
@@ -83,7 +92,9 @@ const CardParagraph = styled.p`
 
 const Card = ({ img, link }) => (
   <CardContainer>
-    <Img src={img} alt="alt-foto" />
+    <ImgContainer>
+      <Img src={img} alt="alt-foto" />
+    </ImgContainer>
     <CardContent>
       <CardTitle>Consectetur adipiscing elit</CardTitle>
       <CardParagraph>Dignissim diam quis enim lobortis</CardParagraph>

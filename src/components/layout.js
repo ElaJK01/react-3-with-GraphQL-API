@@ -12,11 +12,19 @@ const NavigationWrapper = styled.div`
   flex-direction: column;
 `;
 
+const Main = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  margin-top: 20px;
+`;
+
 const Layout = ({ children }) => (
   <>
     <Header />
     <NavigationWrapper>
-      <main>{children}</main>
+      <Main>{children}</Main>
       <Footer linksList={links} />
     </NavigationWrapper>
   </>

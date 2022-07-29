@@ -32,6 +32,6 @@ const sectionText =
   "        consequatur eos quia consectetur et consequuntur corrupti dolore\n" +
   "        recusandae est dicta eligendi.";
 
-const Contact = () => <Section title={"Contact"} text={sectionText} />;
+const Contact = () => <Section title="Contact" text={sectionText} />;
 
 export default Contact;

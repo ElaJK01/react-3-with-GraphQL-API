@@ -4,8 +4,10 @@ import styled from "styled-components";
 const SectionRoot = styled.section`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 95%;
   padding: 10px;
+  justify-content: center;
+  align-items: center;
 
   @media screen and (min-width: 320px) and (max-width: 768px) {
     padding: 5px;

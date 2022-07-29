@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { add, divide, indexOf, map, range, subtract } from "ramda";
-import { DOTS } from "../constants";
 import styled, { css } from "styled-components";
+import { DOTS } from "../constants";
 
 const PaginationContainer = styled.div`
   background-color: whitesmoke;

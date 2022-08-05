@@ -8,6 +8,15 @@ import Loading from "../components/loading";
 import Section from "../components/section";
 import getLangInfo from "../../API/gqlCalls/getLanguageInfo";
 
+const languageText =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod\n" +
+  "        tempor incididunt ut labore et dolore magna aliqua. Id volutpat lacus\n" +
+  "        laoreet non curabitur gravida. Dignissim diam quis enim lobortis\n" +
+  "        scelerisque. Lorem ipsum dolor sit amet, consectetur adipiscing elit,\n" +
+  "        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut\n" +
+  "        enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\n" +
+  "        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit\n";
+
 const LanguageContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -37,7 +46,11 @@ const LanguageDetails = () => {
     </LanguageContainer>
   );
 
-  return <Section title="Language Details">{message}</Section>;
+  return (
+    <Section title="Language Details" text={languageText}>
+      {message}
+    </Section>
+  );
 };
 
 export default LanguageDetails;

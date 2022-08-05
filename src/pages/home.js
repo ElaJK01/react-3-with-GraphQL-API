@@ -27,6 +27,7 @@ const SectionState = styled.div`
   justify-content: center;
   align-items: center;
   margin: auto;
+  width: 100%;
 `;
 
 const Home = () => {
@@ -48,7 +49,10 @@ const Home = () => {
   }, [setContinentsList]);
 
   return (
-    <div>
+    <Section
+      title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+      text={homeText}
+    >
       {error && (
         <SectionState>
           <Error onClick={() => fetchContinents()} />
@@ -59,14 +63,9 @@ const Home = () => {
           <Loading />
         </SectionState>
       ) : (
-        <Section
-          title="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-          text={homeText}
-        >
-          <ContinentsList list={continentsList} />
-        </Section>
+        <ContinentsList list={continentsList} />
       )}
-    </div>
+    </Section>
   );
 };
 

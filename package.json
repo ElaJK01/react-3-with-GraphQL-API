@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/",
     "lint:fix": "eslint --fix src/",
-    "generate-schema": "rover graph introspect https://countries.trevorblades.com/graphql > prod-schema.graphql"
+    "generate-schema": "dotenv rover graph introspect %GRAPH_SERVER% > prod-schema.graphql"
   },
   "repository": "git@github.com:ElaJK01/react-1.git",
   "author": "Elżbieta Janus-Kaleta <60756867+ElaJK01@users.noreply.github.com>",
@@ -24,6 +24,8 @@
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
     "css-loader": "^6.7.1",
+    "dotenv": "^16.0.1",
+    "dotenv-cli": "^6.0.0",
     "file-loader": "^6.2.0",
     "fluture": "^14.0.0",
     "graphql": "^16.5.0",

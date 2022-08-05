@@ -4,7 +4,6 @@ import styled from "styled-components";
 const SectionRoot = styled.section`
   display: flex;
   flex-direction: column;
-  width: 95%;
   padding: 10px;
   justify-content: center;
   align-items: center;
